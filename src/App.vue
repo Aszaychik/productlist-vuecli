@@ -6,18 +6,23 @@
       <font-awesome-icon icon="shopping-cart"></font-awesome-icon>
       <Price :value="69"></Price>
     </div>
+    <section class="animate__animated animate__fadeInRight">
+      <ProductList :products="products" :maximum="maximum"></ProductList>
+    </section>
   </main>
 </template>
 
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Price from "./components/Price.vue";
+import ProductList from "./components/ProductList.vue";
 
 export default {
   name: "App",
   components: {
     FontAwesomeIcon,
     Price,
+    ProductList,
   },
 };
 </script>
