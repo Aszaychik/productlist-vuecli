@@ -10,7 +10,7 @@
         <div class="h5 text-info">
           <Price :value="product.price"></Price>
         </div>
-        <button class="btn btn-primary" v-on:click="addCart(product)">Add to cart</button>
+        <button class="btn btn-primary" v-on:click="addProduct">Add to <font-awesome-icon icon="shopping-cart"></font-awesome-icon></button>
       </div>
     </figcaption>
   </section>
@@ -18,6 +18,7 @@
 
 <script>
 import Price from "./Price.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
   name: "product-list",
@@ -25,8 +26,13 @@ export default {
     return {
       maximum: 1999,
       products: [],
+      cart: [],
       imgClass: "img-thumbnail img-fluid mb-3",
     };
+  },
+  components: {
+    Price,
+    FontAwesomeIcon,
   },
   mounted: function () {
     fetch("https://dummyjson.com/products")
@@ -36,16 +42,32 @@ export default {
         console.log("data :>> ", data.products);
       });
   },
+  methods: {
+    addProduct: function (product) {
+      let productIndex;
+      let productExist = this.cart.filter(function (product, index) {
+        if (product.product.id == Number(product.id)) {
+          productIndex = index;
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      if (productExist.length) {
+        this.cart[productIndex].qty++;
+      } else {
+        this.cart.push({ product: product, qty: 1 });
+      }
+    },
+  },
   computed: {
     showProduct: function () {
       let max = this.maximum;
-      return this.products.filter(function (item) {
-        return item.price <= max;
+      return this.products.filter(function (product) {
+        return product.price <= max;
       });
     },
-  },
-  components: {
-    Price,
   },
 };
 </script>
