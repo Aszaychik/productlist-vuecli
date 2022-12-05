@@ -17,9 +17,9 @@
               <b>
                 <price :value="item.product.price * item.qty"></price>
               </b>
-              <a href="#" class="text-decoration-none">+</a>
+              <a href="#" class="text-decoration-none" @click.stop="$emit('add', index)">+</a>
               <span class=""> {{ item.qty }} </span>
-              <a href="#" class="text-decoration-none" @click.stop="deleteItem(index)">-</a>
+              <a href="#" class="text-decoration-none" @click.stop="$emit('delete', index)">-</a>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 <template>
   <main id="app" class="container mt-5">
     <section>
-      <Navbar :cart="cart" :cartQty="cartQty" :cartTotal="cartTotal" @toggle="toggleSliderStatus"></Navbar>
+      <Navbar :cart="cart" :cartQty="cartQty" :cartTotal="cartTotal" @toggle="toggleSliderStatus" @delete="deleteItem" @add="addQtyItem"></Navbar>
     </section>
     <section class="animate__animated animate__fadeInLeft">
       <PriceSlider :sliderStatus="style.sliderStatus" v-model:maximum="maximum"></PriceSlider>
@@ -83,6 +83,16 @@ export default {
       } else {
         this.cart.push({ product: product, qty: 1 });
       }
+    },
+    deleteItem: function (key) {
+      if (this.cart[key].qty > 1) {
+        this.cart[key].qty--;
+      } else {
+        this.cart.splice(key, 1);
+      }
+    },
+    addQtyItem: function (key) {
+      this.cart[key].qty++;
     },
   },
 };
