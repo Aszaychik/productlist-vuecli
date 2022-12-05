@@ -1,5 +1,5 @@
 <template>
-  <main class="container mx-auto mb-3 d-flex row align-items-center p-3" v-for="product in showProduct" :key="product.id">
+  <div class="container mx-auto mb-3 d-flex row align-items-center p-3" v-for="product in showProduct" :key="product.id">
     <figure class="col-sm-4 text-center">
       <img class="img-thumbnail img-fluid mb-3" :src="product.thumbnail" :alt="product.title" width="200" height="200" />
     </figure>
@@ -13,7 +13,7 @@
         <button class="btn btn-primary" @click="$emit('add', product)">Add to <font-awesome-icon icon="shopping-cart"></font-awesome-icon></button>
       </div>
     </figcaption>
-  </main>
+  </div>
 </template>
 
 <script>
